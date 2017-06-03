@@ -1,8 +1,8 @@
 var linebot = require('linebot');
 var express = require('express');
-var getJSON = require('get-json');
+// var getJSON = require('get-json');
 
-var api_basic = "http://zcash.flypool.org/api/miner_new/";
+var api_basic = 'http://zcash.flypool.org/api/miner_new/';
 
 var bot = linebot({
   channelId: "1518261464",
@@ -12,10 +12,18 @@ var bot = linebot({
 
 // _bot();
 bot.on('message', function(event) {
-  var account = event.message.text;
-  console.log(account);
-  // _getJSON(account);
+  if (event.message.type = 'text') {
+    var msg = event.message.text;
+    event.reply(msg).then(function(data) {
+      // success 
+      console.log(msg);
+    }).catch(function(error) {
+      // error 
+      console.log('error');
+    });
+  }
 });
+
 const app = express();
 const linebotParser = bot.parser();
 app.post('/', linebotParser);
