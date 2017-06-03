@@ -53,12 +53,11 @@ function _getJSON(account, callback) {
     reply_msg  = 'Address : ' + response.address;
     reply_msg += '\nTotal hashrate : ' + response.hashRate;
     reply_msg += '\nAVG hashrate : ' + response.avgHashrate;
-    reply_msg += '\nAvailable Worker : ';
 
     var workers = response.workers;
     for (worker in workers){
       if( now - workers[worker].workerLastSubmitTime < 300 ){
-        reply_msg += '\n  ' + worker + " : " + workers[worker].hashrate;
+        reply_msg += '\n  Worker (' + worker + ") : " + workers[worker].hashrate;
       }
     }
 
