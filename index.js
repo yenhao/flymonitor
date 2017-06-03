@@ -10,7 +10,12 @@ var bot = linebot({
   channelAccessToken: "HQG7JamlwUynuUqynTh7mWBRoBLrLx/+RjQoriGD4FMhpexOEXQ3QV2n1iDgY0XqSmne96+U3xhC2vo+wz6tadNPNQSnkrSH6X7cTGD7s2zDQ/QFmXeAzS7hS1IruN5J437X6IeuIaWbApSNLsZ/hQdB04t89/1O/w1cDnyilFU="
 });
 
-_bot();
+// _bot();
+bot.on('message', function(event) {
+  var account = event.message.text;
+  console.log(account);
+  // _getJSON(account);
+});
 const app = express();
 const linebotParser = bot.parser();
 app.post('/', linebotParser);
@@ -23,17 +28,17 @@ var server = app.listen(process.env.PORT || 8080, function() {
 
 
 
-function _bot(){
-  bot.on('message', function(event) {
-    var account = event.message.text;
-    console.log(account);
-    // _getJSON(account);
-  });
-}
+// function _bot(){
+//   bot.on('message', function(event) {
+//     var account = event.message.text;
+//     console.log(account);
+//     // _getJSON(account);
+//   });
+// }
 
-function _getJSON(account) {
-  // getJSON( api_basic + account, function(error, response) {
-    console.log(response);
-  // });
-  // timer = setInterval(_getJSON, 1800000); //每半小時抓取一次新資料
-}
+// function _getJSON(account) {
+//   // getJSON( api_basic + account, function(error, response) {
+//     console.log(response);
+//   // });
+//   // timer = setInterval(_getJSON, 1800000); //每半小時抓取一次新資料
+// }
