@@ -23,6 +23,6 @@
   },
   "scripts": {
     "prestart": "next build",
-    "start": "next start -p ${PORT}",
+    "start": "next start -p ${PORT}"
   }
 }
