@@ -51,11 +51,11 @@ function _getJSON(account) {
     reply_msg += '\nAVG hashrate : ' + response.avgHashrate;
     reply_msg += '\nAvailable Worker : ';
 
-    response.workers.forEach(function(v,i){
+    for (worker in response.workers){
       if( now - v.workerLastSubmitTime < 180 ){
-        reply_msg += '\n  ' + v.worker + " : " + v.hashrate;
+        reply_msg += '\n  ' + worker + " : " + workers.worker.hashrate;
       }
-    });
+    }
 
     reply_msg += '\nUSD/Day : ' + response.usdPerMin * 1440;
     reply_msg += '\nEth/Day : ' + response.ethPerMin * 1440;
