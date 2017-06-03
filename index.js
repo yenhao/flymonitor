@@ -46,7 +46,7 @@ function _bot(){
   });
 }
 
-function _getJSON(account) {
+function _getJSON(account, callback) {
   var now = time.time();
   var reply_msg = 'Fail to query...';
   getJSON( api_basic + account, function(error, response) {
@@ -66,7 +66,7 @@ function _getJSON(account) {
     reply_msg += '\nEth/Day : ' + response.ethPerMin * 1440;
     reply_msg += '\nBtc/Day : ' + response.btcPerMin * 1440;
     console.log(reply_msg);
-    return reply_msg;
+    callback(reply_msg);
   });
   
   // timer = setInterval(_getJSON, 1800000); //每半小時抓取一次新資料
