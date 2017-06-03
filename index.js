@@ -49,7 +49,6 @@ function _getJSON(account) {
     reply_msg  = '\nAddress : ' + response.address;
     reply_msg += '\nTotal hashrate : ' + response.hashRate;
     reply_msg += '\nAVG hashrate : ' + response.avgHashrate;
-    console.log(reply_msg);
     reply_msg += '\nAvailable Worker : ';
 
     var workers = response.workers;
@@ -62,8 +61,8 @@ function _getJSON(account) {
     reply_msg += '\nUSD/Day : ' + response.usdPerMin * 1440;
     reply_msg += '\nEth/Day : ' + response.ethPerMin * 1440;
     reply_msg += '\nBtc/Day : ' + response.btcPerMin * 1440;
-    console.log(reply_msg);
+    return reply_msg;
   });
-  return reply_msg;
+  
   // timer = setInterval(_getJSON, 1800000); //每半小時抓取一次新資料
 }
