@@ -51,7 +51,8 @@ function _getJSON(account) {
     reply_msg += '\nAVG hashrate : ' + response.avgHashrate;
     reply_msg += '\nAvailable Worker : ';
 
-    for (worker in response.workers){
+    var workers = response.workers;
+    for (worker in workers){
       if( now - workers.worker.workerLastSubmitTime < 180 ){
         reply_msg += '\n  ' + worker + " : " + workers.worker.hashrate;
       }
