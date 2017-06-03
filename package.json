@@ -4,8 +4,8 @@
   "description": "mining pool monitor",
   "main": "index.js",
   "scripts": {
-    "prestart": "next build",
-    "start": "node ."
+  "prestart": "next build",
+  "start": "next start -p ${PORT}"
   },
   "repository": {
     "type": "git",
