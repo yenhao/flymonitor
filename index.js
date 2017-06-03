@@ -30,14 +30,17 @@ function _bot(){
     if (event.message.type = 'text') {
       var msg = event.message.text;
 
-      event.reply(_getJSON(msg)).then(function(data) {
-        // success 
-        console.log("Query pool successfully with account : " + msg);
+      _getJSON(msg, function(reply_msg){
+        event.reply(reply_msg).then(function(data) {
+          // success 
+          console.log("Query pool successfully with account : " + msg);
 
-      }).catch(function(error) {
-        // error 
-        console.log('error');
+        }).catch(function(error) {
+          // error 
+          console.log('error');
+        });
       });
+      
     }
   });
 }
