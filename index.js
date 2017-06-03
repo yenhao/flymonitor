@@ -1,7 +1,9 @@
 var linebot = require('linebot');
 var express = require('express');
 var getJSON = require('get-json');
+
 var api_basic = "http://zcash.flypool.org/api/miner_new/";
+
 var bot = linebot({
   channelId: "1518261464",
   channelSecret: "d629f1aed2013c113383d5fb42a90707",
@@ -24,13 +26,14 @@ var server = app.listen(process.env.PORT || 8080, function() {
 function _bot(){
   bot.on('message', function(event) {
     var account = event.message.text;
-    _getJSON(account);
+    console.log(account);
+    // _getJSON(account);
   });
 }
 
 function _getJSON(account) {
-  getJSON( api_basic + account, function(error, response) {
+  // getJSON( api_basic + account, function(error, response) {
     console.log(response);
-  });
+  // });
   // timer = setInterval(_getJSON, 1800000); //每半小時抓取一次新資料
 }
