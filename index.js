@@ -31,6 +31,7 @@ function _bot(){
       var msg = event.message.text;
 
       _getJSON(msg, function(reply_msg){
+        console.log(reply_msg);
         event.reply(reply_msg).then(function(data) {
           // success 
           console.log("Query pool successfully with account : " + msg);
@@ -64,6 +65,7 @@ function _getJSON(account) {
     reply_msg += '\nUSD/Day : ' + response.usdPerMin * 1440;
     reply_msg += '\nEth/Day : ' + response.ethPerMin * 1440;
     reply_msg += '\nBtc/Day : ' + response.btcPerMin * 1440;
+    console.log(reply_msg);
     return reply_msg;
   });
   
