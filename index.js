@@ -52,7 +52,7 @@ function _getJSON(account) {
     reply_msg += '\nAvailable Worker : ';
 
     for (worker in response.workers){
-      if( now - v.workerLastSubmitTime < 180 ){
+      if( now - workers.worker.workerLastSubmitTime < 180 ){
         reply_msg += '\n  ' + worker + " : " + workers.worker.hashrate;
       }
     }
