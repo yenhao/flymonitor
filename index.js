@@ -48,7 +48,7 @@ function _bot(){
 function _getJSON(account) {
   var now = time.time();
   getJSON( api_basic + account, function(error, response) {
-    reply_msg  = '\nAddress : ' + response.address;
+    var reply_msg  = '\nAddress : ' + response.address;
     reply_msg += '\nTotal hashrate : ' + response.hashRate;
     reply_msg += '\nAVG hashrate : ' + response.avgHashrate;
     reply_msg += '\nAvailable Worker : ';
@@ -58,7 +58,7 @@ function _getJSON(account) {
         reply_msg += '\n  ' + v.worker + " : " + v.hashrate;
       }
     });
-    
+
     reply_msg += '\nUSD/Day : ' + response.usdPerMin * 1440;
     reply_msg += '\nEth/Day : ' + response.ethPerMin * 1440;
     reply_msg += '\nBtc/Day : ' + response.btcPerMin * 1440;
