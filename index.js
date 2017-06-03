@@ -50,14 +50,14 @@ function _getJSON(account, callback) {
   var now = time.time();
   var reply_msg = 'Fail to query...';
   getJSON( api_basic + account, function(error, response) {
-    reply_msg  = '\nAddress : ' + response.address;
+    reply_msg  = 'Address : ' + response.address;
     reply_msg += '\nTotal hashrate : ' + response.hashRate;
     reply_msg += '\nAVG hashrate : ' + response.avgHashrate;
     reply_msg += '\nAvailable Worker : ';
 
     var workers = response.workers;
     for (worker in workers){
-      if( now - workers[worker].workerLastSubmitTime < 180 ){
+      if( now - workers[worker].workerLastSubmitTime < 300 ){
         reply_msg += '\n  ' + worker + " : " + workers[worker].hashrate;
       }
     }
