@@ -53,8 +53,8 @@ function _getJSON(account) {
 
     var workers = response.workers;
     for (worker in workers){
-      if( now - workers.worker.workerLastSubmitTime < 180 ){
-        reply_msg += '\n  ' + worker + " : " + workers.worker.hashrate;
+      if( now - workers[worker].workerLastSubmitTime < 180 ){
+        reply_msg += '\n  ' + worker + " : " + workers[worker].hashrate;
       }
     }
 
