@@ -52,19 +52,18 @@ function _getJSON(account, callback) {
   getJSON( api_basic + account, function(error, response) {
     reply_msg  = 'Address : ' + response.address;
     reply_msg += '\nTotal hashrate : ' + response.hashRate;
-    reply_msg += '\nAVG hashrate : ' + response.avgHashrate;
+    reply_msg += '\nAVG hashrate : ' + response.avgHashrate + "\n";
 
     var workers = response.workers;
     for (worker in workers){
       if( now - workers[worker].workerLastSubmitTime < 300 ){
-        reply_msg += '\n  Worker (' + worker + ") : " + workers[worker].hashrate;
+        reply_msg += '\nWorker (' + worker + ") : " + workers[worker].hashrate;
       }
     }
 
-    reply_msg += '\nUSD/Day : ' + response.usdPerMin * 1440;
+    reply_msg += '\n\nUSD/Day : ' + response.usdPerMin * 1440;
     reply_msg += '\nEth/Day : ' + response.ethPerMin * 1440;
     reply_msg += '\nBtc/Day : ' + response.btcPerMin * 1440;
-    console.log(reply_msg);
     callback(reply_msg);
   });
   
