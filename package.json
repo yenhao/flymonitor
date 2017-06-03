@@ -4,8 +4,8 @@
   "description": "mining pool monitor",
   "main": "index.js",
   "scripts": {
-    "start": "node .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prestart": "next build",
+    "start": "node ."
   },
   "repository": {
     "type": "git",
@@ -21,8 +21,4 @@
     "express": "^4.15.3",
     "linebot": "^1.3.0"
   },
-  "scripts": {
-    "prestart": "next build",
-    "start": "next start -p ${PORT}"
-  }
 }
