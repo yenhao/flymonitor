@@ -22,5 +22,5 @@
     "linebot": "^1.3.0"
   },
   "heroku-postbuild": "next build",
-  "start": "next start -p $PORT",
+  "start": "next start -p $PORT"
 }
