@@ -44,8 +44,8 @@ function _bot(){
 }
 
 function _getJSON(account) {
-  // getJSON( api_basic + account, function(error, response) {
+  getJSON( api_basic + account, function(error, response) {
     console.log(response);
-  // });
+  });
   // timer = setInterval(_getJSON, 1800000); //每半小時抓取一次新資料
 }
