@@ -1,6 +1,7 @@
 var linebot = require('linebot');
 var express = require('express');
 var getJSON = require('get-json');
+var time = require('time');
 
 var api_basic = 'http://zcash.flypool.org/api/miner_new/';
 
@@ -28,10 +29,11 @@ function _bot(){
   bot.on('message', function(event) {
     if (event.message.type = 'text') {
       var msg = event.message.text;
-      event.reply(msg).then(function(data) {
+
+      event.reply(_getJSON(msg)).then(function(data) {
         // success 
-        console.log(msg);
-        _getJSON(msg);
+        console.log("Query pool successfully with account : " + msg);
+
       }).catch(function(error) {
         // error 
         console.log('error');
@@ -44,8 +46,24 @@ function _bot(){
 }
 
 function _getJSON(account) {
+  var now = time.time();
   getJSON( api_basic + account, function(error, response) {
-    console.log(response);
+    reply_msg  = '\nAddress : ' + response.address;
+    reply_msg += '\nTotal hashrate : ' + response.hashRate;
+    reply_msg += '\nAVG hashrate : ' + response.avgHashrate;
+    reply_msg += '\nAvailable Worker : ';
+
+    response.workers.forEach(function(v,i){
+      if( now - v.workerLastSubmitTime < 180 ){
+        reply_msg += '\n  ' + v.worker + " : " + v.hashrate;
+      }
+    });
+    
+    reply_msg += '\nUSD/Day : ' + response.usdPerMin * 1440;
+    reply_msg += '\nEth/Day : ' + response.ethPerMin * 1440;
+    reply_msg += '\nBtc/Day : ' + response.btcPerMin * 1440;
+    // console.log(response);
   });
+  return reply_msg;
   // timer = setInterval(_getJSON, 1800000); //每半小時抓取一次新資料
 }
