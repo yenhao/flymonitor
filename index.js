@@ -1,6 +1,6 @@
 var linebot = require('linebot');
 var express = require('express');
-var getJSON = require('get-json')
+var getJSON = require('get-json');
 
 // var api_basic = 'http://zcash.flypool.org/api/miner_new/';
 
