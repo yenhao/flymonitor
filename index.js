@@ -39,16 +39,14 @@ function _bot(){
         console.log('error');
       });
     }
-    
-    
   });
-
 }
 
 function _getJSON(account) {
   var now = time.time();
+  var reply_msg = 'Fail to query...';
   getJSON( api_basic + account, function(error, response) {
-    var reply_msg  = '\nAddress : ' + response.address;
+    reply_msg  = '\nAddress : ' + response.address;
     reply_msg += '\nTotal hashrate : ' + response.hashRate;
     reply_msg += '\nAVG hashrate : ' + response.avgHashrate;
     reply_msg += '\nAvailable Worker : ';
