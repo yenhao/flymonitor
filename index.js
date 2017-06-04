@@ -35,7 +35,7 @@ function _bot(){
         // Show pool status
         case 'dashboard':
           try{
-            var account = table.users.user_id['zec'];
+            var account = table.users[user_id]['zec'];
             dashboard(event, account);
           }catch(err){
             _reply_msg(event, 'Unable to find pool address', 'Unable to find pool address for : ' + user_id);
@@ -47,6 +47,7 @@ function _bot(){
         case 'addpool':
           table.users[user_id] = {};
           table.users[user_id][msg_array[1].toLowerCase()] = msg_array[2];
+          console.log(table);
           break;
 
         // case 2:
