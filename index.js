@@ -25,9 +25,8 @@ var server = app.listen(process.env.PORT || 8080, function() {
 });
 
 function _bot(){
-  var user_id = event.source.userId;
-
   bot.on('message', function(event) {
+    var user_id = event.source.userId;
     if (event.message.type = 'text') {
       var msg = event.message.text;
       var msg_array = msg.split(" ");
