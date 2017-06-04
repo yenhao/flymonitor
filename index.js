@@ -30,19 +30,22 @@ function _bot(){
     if (event.message.type = 'text') {
       var msg = event.message.text;
       var msg_array = msg.split(" ");
+      console.log(msg_array);
       switch (msg_array[0]) {
         // Show pool status
         case 'dashboard':
-          var account = table.users[user_id]['zec'];
-          if( account!= undefined){
+          try{
+            var account = table.users.user_id['zec'];
             dashboard(event, account);
-          }else{
+          }catch(err){
             _reply_msg(event, 'Unable to find pool address', 'Unable to find pool address for : ' + user_id);
+            console.log(err.message);
           }
+
           break;
         // Add user pool
         case 'addpool':
-          table.users[user_id][msg_array[1].toLowerCase()] = msg_array[2];
+          table.users.user_id.[msg_array[1].toLowerCase()] = msg_array[2];
           break;
 
         // case 2:
