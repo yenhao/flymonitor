@@ -2,7 +2,6 @@ var time = require('time');
 var linebot = require('linebot');
 var express = require('express');
 var getJSON = require('get-json');
-var jsonfile = require('jsonfile');
 
 var api_basic = 'http://zcash.flypool.org/api/miner_new/';
 var table = {"users":{}};
