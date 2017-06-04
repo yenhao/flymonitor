@@ -35,15 +35,17 @@ function _bot(){
         case 'dashboard':
           // Query all pools
           if (msg_array.length == 1){
-            for (pool in users[user_id]){
-              try{
+            try{
+              var user = table.users[user_id];
+              for (pool in user){
                 var account = table.users[user_id][pool];
                 dashboard(event, account);
-              }catch(err){
-                _reply_msg(event, 'Unable to find pool address', 'Unable to find pool address for : ' + user_id);
-                console.log(err.message);
               }
+            }catch(err){
+              _reply_msg(event, 'Unable to find pool address', 'Unable to find pool address for : ' + user_id);
+              console.log(err.message);
             }
+            
           // Query certain pool
           }else{
             try{
