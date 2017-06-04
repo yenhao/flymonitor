@@ -35,6 +35,7 @@ function _bot(){
         // Show pool status
         case 'dashboard':
           try{
+            console.log(table);
             var account = table.users[user_id]['zec'];
             dashboard(event, account);
           }catch(err){
