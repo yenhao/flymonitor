@@ -30,30 +30,37 @@ function _bot(){
     if (event.message.type = 'text') {
       var msg = event.message.text;
       var msg_array = msg.split(" ");
-      console.log(msg_array);
       switch (msg_array[0]) {
         // Show pool status
         case 'dashboard':
-          try{
-            console.log(table);
-            var account = table.users[user_id]['zec'];
-            dashboard(event, account);
-          }catch(err){
-            _reply_msg(event, 'Unable to find pool address', 'Unable to find pool address for : ' + user_id);
-            console.log(err.message);
+          // Query all pools
+          if (msg_array.length == 1){
+            for (pool in users[user_id]){
+              try{
+                var account = table.users[user_id][pool];
+                dashboard(event, account);
+              }catch(err){
+                _reply_msg(event, 'Unable to find pool address', 'Unable to find pool address for : ' + user_id);
+                console.log(err.message);
+              }
+            }
+          // Query certain pool
+          }else{
+            try{
+              var account = table.users[user_id][msg_array[1].toLowerCase()];
+              dashboard(event, account);
+            }catch(err){
+              _reply_msg(event, 'Unable to find pool address', 'Unable to find pool address for : ' + user_id);
+              console.log(err.message);
+            }
           }
-
           break;
         // Add user pool
         case 'addpool':
           table.users[user_id] = {};
           table.users[user_id][msg_array[1].toLowerCase()] = msg_array[2];
-          console.log(table);
+          _reply_msg(event, 'Add Successfully', 'Adding pool for ' + user_id);
           break;
-
-        // case 2:
-        //   day = "Tuesday";
-        //   break;
 
         default:
           _reply_msg(event, '???', "Unable to process message : " + msg);
