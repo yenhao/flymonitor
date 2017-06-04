@@ -45,7 +45,8 @@ function _bot(){
           break;
         // Add user pool
         case 'addpool':
-          table.users.user_id[msg_array[1].toLowerCase()] = msg_array[2];
+          table.users[user_id] = {};
+          table.users[user_id][msg_array[1].toLowerCase()] = msg_array[2];
           break;
 
         // case 2:
