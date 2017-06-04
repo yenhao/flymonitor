@@ -1,9 +1,11 @@
+var time = require('time');
 var linebot = require('linebot');
 var express = require('express');
 var getJSON = require('get-json');
-var time = require('time');
+var jsonfile = require('jsonfile');
 
 var api_basic = 'http://zcash.flypool.org/api/miner_new/';
+var table = {"users":{}};
 
 var bot = linebot({
   channelId: "1518261464",
@@ -23,26 +25,52 @@ var server = app.listen(process.env.PORT || 8080, function() {
   console.log("App now running on port", port);
 });
 
-
-
 function _bot(){
+  var user_id = event.source.userId;
+
   bot.on('message', function(event) {
     if (event.message.type = 'text') {
       var msg = event.message.text;
+      var msg_array = msg.split(" ");
+      switch (msg_array[0]) {
+        // Show pool status
+        case 'dashboard':
+          var account = table.users[user_id]['zec'];
+          if( account!= undefined){
+            dashboard(account);
+          }else{
+            _reply_msg('Unable to find pool address', 'Unable to find pool address for : ' + user_id);
+          }
+          break;
+        // Add user pool
+        case 'addpool':
+          table.users[user_id][msg_array[1].toLowerCase()] = msg_array[2];
+          break;
 
-      _getJSON(msg, function(reply_msg){
-        console.log(reply_msg);
-        event.reply(reply_msg).then(function(data) {
-          // success 
-          console.log("Query pool successfully with account : " + msg);
+        // case 2:
+        //   day = "Tuesday";
+        //   break;
 
-        }).catch(function(error) {
-          // error 
-          console.log('error');
-        });
-      });
-      
+        default:
+          _reply_msg('???', "Unable to process message : " + msg);
+      }
     }
+  });
+}
+
+function dashboard(account){
+  _getJSON(account, function(reply_msg){
+    _reply_msg(reply_msg, "Query pool successfully with account : " + account);
+  });
+}
+
+function _reply_msg(reply_msg, log){
+  event.reply(reply_msg).then(function(data) {
+    // success 
+    console.log(log);
+  }).catch(function(error) {
+    // error 
+    console.log('error');
   });
 }
 
@@ -66,6 +94,5 @@ function _getJSON(account, callback) {
     reply_msg += '\nBtc/Day : ' + response.btcPerMin * 1440;
     callback(reply_msg);
   });
-  
   // timer = setInterval(_getJSON, 1800000); //每半小時抓取一次新資料
 }
