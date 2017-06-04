@@ -35,9 +35,9 @@ function _bot(){
         case 'dashboard':
           var account = table.users[user_id]['zec'];
           if( account!= undefined){
-            dashboard(account);
+            dashboard(event, account);
           }else{
-            _reply_msg('Unable to find pool address', 'Unable to find pool address for : ' + user_id);
+            _reply_msg(event, 'Unable to find pool address', 'Unable to find pool address for : ' + user_id);
           }
           break;
         // Add user pool
@@ -50,19 +50,19 @@ function _bot(){
         //   break;
 
         default:
-          _reply_msg('???', "Unable to process message : " + msg);
+          _reply_msg(event, '???', "Unable to process message : " + msg);
       }
     }
   });
 }
 
-function dashboard(account){
+function dashboard(event, account){
   _getJSON(account, function(reply_msg){
-    _reply_msg(reply_msg, "Query pool successfully with account : " + account);
+    _reply_msg(event, reply_msg, "Query pool successfully with account : " + account);
   });
 }
 
-function _reply_msg(reply_msg, log){
+function _reply_msg(event, reply_msg, log){
   event.reply(reply_msg).then(function(data) {
     // success 
     console.log(log);
